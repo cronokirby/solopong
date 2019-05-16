@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "Circular pong game",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cronokirby/solopong.git"
@@ -18,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/cronokirby/solopong/issues"
   },
-  "homepage": "https://github.com/cronokirby/solopong#readme"
+  "homepage": "https://github.com/cronokirby/solopong#readme",
+  "dependencies": {
+    "pixi.js": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/pixi.js": "^4.8.7",
+    "typescript": "^3.4.5"
+  }
 }
