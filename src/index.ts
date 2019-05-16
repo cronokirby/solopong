@@ -25,7 +25,7 @@ function circle(stage: PIXI.Container, circle: Circle) {
 
 
 class Paddle {
-    private static readonly WIDTH = 80;
+    private static readonly WIDTH = 90;
     private mouse: PIXI.interaction.InteractionData;
     private graphics: PIXI.Graphics;
 
@@ -43,9 +43,13 @@ class Paddle {
         const dir = { x: mousePos.x - CENTER.x, y: mousePos.y - CENTER.y };
         const dirScale = Math.sqrt(dir.x * dir.x + dir.y * dir.y);
         const unitDir = { x: dir.x / dirScale, y: dir.y / dirScale };
-        const { x, y } = { x: unitDir.x * RADIUS + CENTER.x, y: unitDir.y * RADIUS + CENTER.y };
-        if (x >= 0) this.graphics.x = x;
-        if (y >= 0) this.graphics.y = y;
+        const shiftRadius = RADIUS + 2;
+        const { x, y } = { x: unitDir.x * shiftRadius + CENTER.x, y: unitDir.y * shiftRadius + CENTER.y };
+
+        const ortho = { x: unitDir.y, y: unitDir.x };
+        this.graphics.x = x + ortho.x * Paddle.WIDTH / 2;
+        this.graphics.y = y - ortho.y * Paddle.WIDTH / 2;
+
         const piAngle = unitDir.y >= 0 ? Math.acos(unitDir.x) : -Math.acos(unitDir.x);
         const angle = piAngle * 180 / Math.PI + 90;
         this.graphics.angle = angle;
