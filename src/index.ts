@@ -57,6 +57,25 @@ class Paddle {
 }
 
 
+class Ball {
+    private velocity = {x: 150, y: 150};
+    private graphics: PIXI.Graphics;
+
+    constructor(app: PIXI.Application) {
+        this.graphics = new PIXI.Graphics();
+        this.graphics.beginFill(0xbe64e5);
+        this.graphics.lineStyle(3, 0xbe64e5);
+        this.graphics.drawCircle(CENTER.x, CENTER.y, 5);
+        app.stage.addChild(this.graphics);
+    }
+
+    update(deltaS: number) {
+        this.graphics.x += this.velocity.x * deltaS;
+        this.graphics.y += -this.velocity.y * deltaS;
+    }
+}
+
+
 const app = new PIXI.Application({
     width: WIDTH,
     height: HEIGHT,
@@ -74,8 +93,10 @@ window.addEventListener('load', () => {
 
 circle(app.stage, { pos: CENTER, radius: RADIUS });
 const paddle = new Paddle(app);
+const ball = new Ball(app);
 
 app.ticker.add(() => {
     const deltaS = app.ticker.deltaMS / 1000;
     paddle.update(deltaS);
+    ball.update(deltaS);
 })
